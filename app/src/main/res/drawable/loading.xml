@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list android:oneshot="false"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+  
+    <item android:duration="160">
+        <clip android:gravity="left" android:drawable="@drawable/waiting_loading_icon1" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="160">
+        <clip android:gravity="left" android:drawable="@drawable/waiting_loading_icon2" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="160">
+        <clip android:gravity="left" android:drawable="@drawable/waiting_loading_icon3" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="160">
+        <clip android:gravity="left" android:drawable="@drawable/waiting_loading_icon4" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="160">
+        <clip android:gravity="left" android:drawable="@drawable/waiting_loading_icon5" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="160">
+        <clip android:gravity="left" android:drawable="@drawable/waiting_loading_icon6" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="160">
+        <clip android:gravity="left" android:drawable="@drawable/waiting_loading_icon7" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="160">
+        <clip android:gravity="left" android:drawable="@drawable/waiting_loading_icon8" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="160">
+        <clip android:gravity="left" android:drawable="@drawable/waiting_loading_icon9" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="160">
+        <clip android:gravity="left" android:drawable="@drawable/waiting_loading_icon10" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="160">
+        <clip android:gravity="left" android:drawable="@drawable/waiting_loading_icon11" android:clipOrientation="horizontal" />
+    </item>
+    <item android:duration="160">
+        <clip android:gravity="left" android:drawable="@drawable/waiting_loading_icon12" android:clipOrientation="horizontal" />
+    </item>
+
+</animation-list>

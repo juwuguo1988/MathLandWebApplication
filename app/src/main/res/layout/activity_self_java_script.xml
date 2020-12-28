@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.SelfJavaScriptActivity">
+
+    <wendu.dsbridge.DWebView
+        android:id="@+id/web_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="60dp"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/btnAdd"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/add" />
+
+        <ImageButton
+            android:id="@+id/btnRefreshLoad"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/icon_again" />
+    </LinearLayout>
+</RelativeLayout>
+
