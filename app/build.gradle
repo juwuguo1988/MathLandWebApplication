@@ -18,6 +18,9 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true
+
+        buildConfigField "String", "CM_BJ_BASE_URL", rootProject.ext.BJ_QINIU_URL
+        buildConfigField "String", "CM_SZ_BASE_URL", rootProject.ext.SZ_QINIU_URL
     }
 
     buildTypes {

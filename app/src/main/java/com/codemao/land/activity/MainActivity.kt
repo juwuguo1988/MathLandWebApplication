@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.codemao.land.R
 import com.codemao.land.utils.file.FileUtils
+import com.codemao.land.utils.global.AppConstant
 import com.codemao.land.utils.loading.LoadingDialog
 import com.codemao.land.utils.okhttp.OkHttpUtils
 import com.codemao.land.utils.okhttp.callback.FileCallBack
@@ -106,7 +107,7 @@ class MainActivity : AppCompatActivity() {
         }
         OkHttpUtils
             .get()
-            .url("http://qldouub7c.hb-bkt.clouddn.com/$destFileName")
+            .url(AppConstant.getBaseUrl() + destFileName)
             .build()
             .execute(object : FileCallBack(destFileDir, destFileName) {
                 override fun onBefore(request: Request, id: Int) {
@@ -140,7 +141,7 @@ class MainActivity : AppCompatActivity() {
         }
         OkHttpUtils
             .get()
-            .url("http://qldouub7c.hb-bkt.clouddn.com/$destFileName")
+            .url(AppConstant.getBaseUrl() + destFileName)
             .build()
             .execute(object : FileCallBack(destFileDir, destFileName) {
                 override fun onBefore(request: Request, id: Int) {
@@ -174,7 +175,7 @@ class MainActivity : AppCompatActivity() {
         }
         OkHttpUtils
             .get()
-            .url("http://qldouub7c.hb-bkt.clouddn.com/$destFileName")
+            .url(AppConstant.getBaseUrl() + destFileName)
             .build()
             .execute(object : FileCallBack(destFileDir, destFileName) {
                 override fun onBefore(request: Request, id: Int) {
