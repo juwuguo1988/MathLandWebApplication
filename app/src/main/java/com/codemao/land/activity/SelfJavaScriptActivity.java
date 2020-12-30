@@ -8,14 +8,19 @@ import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.webkit.JavascriptInterface;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.codemao.land.R;
 import com.codemao.land.api.BridgeWebViewClient;
-import com.codemao.land.api.JsApi;
+
 import java.lang.reflect.Method;
+
+import wendu.dsbridge.CompletionHandler;
 import wendu.dsbridge.DWebView;
 import wendu.dsbridge.OnReturnValue;
 
@@ -39,14 +44,14 @@ public class SelfJavaScriptActivity extends AppCompatActivity {
 
     private void findViewById() {
         webView = findViewById(R.id.web_view);
-        webView.addJavascriptObject(new JsApi(), null);
-        //webView.loadUrl("file:///android_asset/js-native-transform.html");
+       // webView.loadUrl("file:///android_asset/js-native-transform.html");
     }
 
     @SuppressLint("SetJavaScriptEnabled")
     private void initData() {
         mWebUrl = getIntent().getStringExtra(WEB_VIEW_URL);
         mLocalJsonPath = getIntent().getStringExtra(WEB_JSON_PATH_URL);
+        webView.addJavascriptObject(new JsCallNativeApi(mLocalJsonPath), null);
         Log.e(TAG, mLocalJsonPath);
         try {//本地HTML里面有跨域的请求 原生webview需要设置之后才能实现跨域请求
             if (Build.VERSION.SDK_INT >= 16) {
@@ -79,9 +84,19 @@ public class SelfJavaScriptActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) {
-                Log.i(TAG, "receive screen off");
+                webView.callHandler("gamePause", new OnReturnValue() {
+                    @Override
+                    public void onValue(Object retValue) {
+                        Log.i("============", "gamePause");
+                    }
+                });
             } else if (Intent.ACTION_SCREEN_ON.equals(intent.getAction())) {
-                Log.i(TAG, "receive screen on");
+                webView.callHandler("gameResume", new OnReturnValue() {
+                    @Override
+                    public void onValue(Object retValue) {
+                        Log.i("============", "gameResume");
+                    }
+                });
             }
         }
 
@@ -101,5 +116,18 @@ public class SelfJavaScriptActivity extends AppCompatActivity {
                 }
             });
         });
+    }
+
+    class JsCallNativeApi {
+        private String filePath;
+
+        JsCallNativeApi(String path) {
+            this.filePath = path;
+        }
+
+        @JavascriptInterface
+        public void getConfigPath(Object msg, CompletionHandler<String> handler) {
+            handler.complete(filePath);
+        }
     }
 }
