@@ -29,5 +29,5 @@ task clean(type: Delete) {
 
 ext {
     SZ_QINIU_URL = '"http://qldouub7c.hb-bkt.clouddn.com/"'
-    BJ_QINIU_URL = '"http://qm1lwx0fx.hb-bkt.clouddn.com"'
+    BJ_QINIU_URL = '"http://qm1lwx0fx.hb-bkt.clouddn.com/"'
    }
