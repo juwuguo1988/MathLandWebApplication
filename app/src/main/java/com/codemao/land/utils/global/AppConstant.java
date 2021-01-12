@@ -6,7 +6,7 @@ import com.codemao.land.BuildConfig;
  */
 public class AppConstant {
     public static String getBaseUrl() {
-        return BuildConfig.CM_SZ_BASE_URL;
+        return BuildConfig.CM_BJ_BASE_URL;
     }
 
 }

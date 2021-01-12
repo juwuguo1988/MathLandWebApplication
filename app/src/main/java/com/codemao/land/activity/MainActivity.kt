@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun localJsonFile(): File {
-        val fileName = "lesson"
+        val fileName = "lessonConfig"
         val tmpDir: String = FileUtils.createTmpDir(this)
         val destFileDir = "$tmpDir/MathLand"
         val destFileName = "$fileName.json"
@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun downloadJsonFile() {
-        val fileName = "lesson"
+        val fileName = "lessonConfig"
         val tmpDir: String = FileUtils.createTmpDir(this)
         val destFileDir = "$tmpDir/MathLand"
         val destFileName = "$fileName.json"

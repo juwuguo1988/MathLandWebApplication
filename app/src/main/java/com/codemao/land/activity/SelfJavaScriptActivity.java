@@ -44,7 +44,7 @@ public class SelfJavaScriptActivity extends AppCompatActivity {
 
     private void findViewById() {
         webView = findViewById(R.id.web_view);
-       // webView.loadUrl("file:///android_asset/js-native-transform.html");
+        // webView.loadUrl("file:///android_asset/js-native-transform.html");
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -124,10 +124,20 @@ public class SelfJavaScriptActivity extends AppCompatActivity {
         JsCallNativeApi(String path) {
             this.filePath = path;
         }
+//
+//        @JavascriptInterface
+//        public void getConfigPath(Object msg, CompletionHandler<String> handler) {
+//            handler.complete(filePath);
+//        }
 
         @JavascriptInterface
-        public void getConfigPath(Object msg, CompletionHandler<String> handler) {
-            handler.complete(filePath);
+        public void onLoadSuccess(Object msg, CompletionHandler<String> handler) {
+            webView.callHandler("getConfigPath", new Object[]{filePath}, new OnReturnValue() {
+                @Override
+                public void onValue(Object retValue) {
+
+                }
+            });
         }
     }
 }
