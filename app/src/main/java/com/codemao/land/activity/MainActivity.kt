@@ -24,10 +24,12 @@ import java.io.File
 
 class MainActivity : AppCompatActivity() {
     private var dialog: LoadingDialog? = null
+    private var mRandomInt: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         window.statusBarColor = ContextCompat.getColor(this, R.color.c_858e99)
+        mRandomInt = (Math.random() * 10000).toInt()
         setListener()
     }
 
@@ -105,9 +107,15 @@ class MainActivity : AppCompatActivity() {
         if (file.exists()) {
             return
         }
+        val stringBufferURl = StringBuffer()
+            .append(AppConstant.getBaseUrl())
+            .append(destFileName)
+            .append("?v=")
+            .append(mRandomInt)
+            .toString()
         OkHttpUtils
             .get()
-            .url(AppConstant.getBaseUrl() + destFileName)
+            .url(stringBufferURl)
             .build()
             .execute(object : FileCallBack(destFileDir, destFileName) {
                 override fun onBefore(request: Request, id: Int) {
@@ -139,9 +147,15 @@ class MainActivity : AppCompatActivity() {
         if (file.exists()) {
             return
         }
+        val stringBufferURl = StringBuffer()
+            .append(AppConstant.getBaseUrl())
+            .append(destFileName)
+            .append("?v=")
+            .append(mRandomInt)
+            .toString()
         OkHttpUtils
             .get()
-            .url(AppConstant.getBaseUrl() + destFileName)
+            .url(stringBufferURl)
             .build()
             .execute(object : FileCallBack(destFileDir, destFileName) {
                 override fun onBefore(request: Request, id: Int) {
@@ -173,9 +187,15 @@ class MainActivity : AppCompatActivity() {
         if (file.exists()) {
             return
         }
+        val stringBufferURl = StringBuffer()
+            .append(AppConstant.getBaseUrl())
+            .append(destFileName)
+            .append("?v=")
+            .append(mRandomInt)
+            .toString()
         OkHttpUtils
             .get()
-            .url(AppConstant.getBaseUrl() + destFileName)
+            .url(stringBufferURl)
             .build()
             .execute(object : FileCallBack(destFileDir, destFileName) {
                 override fun onBefore(request: Request, id: Int) {
