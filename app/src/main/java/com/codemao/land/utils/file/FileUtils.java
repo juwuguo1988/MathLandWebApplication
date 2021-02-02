@@ -24,7 +24,7 @@ public class FileUtils {
     // 创建一个临时目录，用于复制临时文件，如assets目录下的离线资源文件
     public static String createTmpDir(Context context) {
         String sampleDir = "CodeMaoFile";
-        String tmpDir = Environment.getExternalStorageDirectory().toString() + "/" + sampleDir;
+        String tmpDir = Environment.getExternalStorageDirectory().toString() + "/" + sampleDir + File.separator;
         if (!FileUtils.makeDir(tmpDir)) {
             tmpDir = context.getExternalFilesDir(sampleDir).getAbsolutePath();
             if (!FileUtils.makeDir(sampleDir)) {
@@ -32,6 +32,26 @@ public class FileUtils {
             }
         }
         return tmpDir;
+    }
+
+    public static String getFreeCreationFilePath(Context context) {
+        String dirPath = createTmpDir(context);
+        String path = dirPath + "FreeCreationFile" + File.separator;
+        File file = new File(path);
+        if (!file.exists()) {
+            file.mkdir();
+        }
+        return path;
+    }
+
+    public static String getTeacherLessonFilePath(Context context) {
+        String dirPath = createTmpDir(context);
+        String path = dirPath + "TeacherLessonFile" + File.separator;
+        File file = new File(path);
+        if (!file.exists()) {
+            file.mkdir();
+        }
+        return path;
     }
 
     public static boolean makeDir(String dirPath) {
@@ -157,44 +177,44 @@ public class FileUtils {
      * @param outPathString 要解压缩路径
      * @throws Exception
      */
-    public static void unZipFolder(File zipFile, String outPathString){
-       try {
-           String zipFileString = zipFile.getPath();
-           ZipInputStream inZip = new ZipInputStream(new FileInputStream(zipFileString));
-           ZipEntry zipEntry;
-           String szName = "";
-           while ((zipEntry = inZip.getNextEntry()) != null) {
-               szName = zipEntry.getName();
-               if (zipEntry.isDirectory()) {
-                   //获取部件的文件夹名
-                   szName = szName.substring(0, szName.length() - 1);
-                   File folder = new File(outPathString + File.separator + szName);
-                   folder.mkdirs();
-               } else {
-                   File file = new File(outPathString + File.separator + szName);
-                   if (!file.exists()) {
-                       file.getParentFile().mkdirs();
-                       file.createNewFile();
-                   }
-                   // 获取文件的输出流
-                   FileOutputStream out = new FileOutputStream(file);
-                   int len;
-                   byte[] buffer = new byte[1024];
-                   // 读取（字节）字节到缓冲区
-                   while ((len = inZip.read(buffer)) != -1) {
-                       // 从缓冲区（0）位置写入（字节）字节
-                       out.write(buffer, 0, len);
-                       out.flush();
-                   }
-                   out.close();
-               }
-           }
-           inZip.close();
-       }catch (Exception e){
-           e.printStackTrace();
-       }finally {
-           delFile(zipFile);
-       }
+    public static void unZipFolder(File zipFile, String outPathString) {
+        try {
+            String zipFileString = zipFile.getPath();
+            ZipInputStream inZip = new ZipInputStream(new FileInputStream(zipFileString));
+            ZipEntry zipEntry;
+            String szName = "";
+            while ((zipEntry = inZip.getNextEntry()) != null) {
+                szName = zipEntry.getName();
+                if (zipEntry.isDirectory()) {
+                    //获取部件的文件夹名
+                    szName = szName.substring(0, szName.length() - 1);
+                    File folder = new File(outPathString + File.separator + szName);
+                    folder.mkdirs();
+                } else {
+                    File file = new File(outPathString + File.separator + szName);
+                    if (!file.exists()) {
+                        file.getParentFile().mkdirs();
+                        file.createNewFile();
+                    }
+                    // 获取文件的输出流
+                    FileOutputStream out = new FileOutputStream(file);
+                    int len;
+                    byte[] buffer = new byte[1024];
+                    // 读取（字节）字节到缓冲区
+                    while ((len = inZip.read(buffer)) != -1) {
+                        // 从缓冲区（0）位置写入（字节）字节
+                        out.write(buffer, 0, len);
+                        out.flush();
+                    }
+                    out.close();
+                }
+            }
+            inZip.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            delFile(zipFile);
+        }
     }
 
 

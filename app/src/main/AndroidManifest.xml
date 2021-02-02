@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.codemao.land" >
+    package="com.codemao.land">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.DEVICE_POWER"
+    <uses-permission
+        android:name="android.permission.DEVICE_POWER"
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
@@ -15,21 +16,30 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_config"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:networkSecurityConfig="@xml/network_config"
-        android:theme="@style/Theme.MathLandWebApplication"
-        android:requestLegacyExternalStorage="true">
-        <activity android:name=".activity.MainActivity" >
+        android:theme="@style/Theme.MathLandWebApplication">
+        <activity android:name=".activity.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.SelfJavaScriptActivity"
+        <activity
+            android:name=".activity.SelfJavaScriptActivity"
             android:hardwareAccelerated="true"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.TeacherLessonActivity"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FreeCreationActivity"
+            android:hardwareAccelerated="true"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
