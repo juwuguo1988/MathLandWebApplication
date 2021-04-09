@@ -1,6 +1,8 @@
 package com.codemao.land.activity;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
+import android.app.ActivityManager.RunningAppProcessInfo;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +21,7 @@ import com.codemao.land.R;
 import com.codemao.land.api.BridgeWebViewClient;
 
 import java.lang.reflect.Method;
+import java.util.List;
 
 import wendu.dsbridge.CompletionHandler;
 import wendu.dsbridge.DWebView;
@@ -31,6 +34,8 @@ public class SelfJavaScriptActivity extends AppCompatActivity {
     private DWebView webView;
     private String mWebUrl;
     private String mLocalJsonPath;
+    public boolean isForeground = false;
+    public boolean isFirstComeApp = false;
     private DevicePowerReceiver mDevicePowerReceiver;
 
     @Override
@@ -45,6 +50,39 @@ public class SelfJavaScriptActivity extends AppCompatActivity {
     private void findViewById() {
         webView = findViewById(R.id.web_view);
         // webView.loadUrl("file:///android_asset/js-native-transform.html");
+    }
+
+    protected void onResume() {
+        if (!isForeground) {
+            //由后台切换到前台
+            isForeground = true;
+            if (isFirstComeApp) {
+                webView.callHandler("resume", new OnReturnValue() {
+                    @Override
+                    public void onValue(Object retValue) {
+                        Log.i("============", "gameResume");
+                    }
+                });
+            }
+        }
+        super.onResume();
+    }
+
+
+    @Override
+    protected void onStop() {
+        if (!isAppOnForeground()) {
+            //app 进入后台
+            isForeground = false;//记录当前已经进入后台
+            isFirstComeApp = true;
+            webView.callHandler("pause", new OnReturnValue() {
+                @Override
+                public void onValue(Object retValue) {
+                    Log.i("============", "gamePause");
+                }
+            });
+        }
+        super.onStop();
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -139,5 +177,33 @@ public class SelfJavaScriptActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    /**
+     * 判断app是否处于前台
+     *
+     * @return
+     */
+    public boolean isAppOnForeground() {
+        ActivityManager activityManager = (ActivityManager) getApplicationContext()
+                .getSystemService(Context.ACTIVITY_SERVICE);
+        String packageName = getApplicationContext().getPackageName();
+        /**
+         * 获取Android设备中所有正在运行的App
+         */
+        List<RunningAppProcessInfo> appProcesses = activityManager
+                .getRunningAppProcesses();
+        if (appProcesses == null)
+            return false;
+
+        for (RunningAppProcessInfo appProcess : appProcesses) {
+            // The name of the process that this object is associated with.
+            if (appProcess.processName.equals(packageName)
+                    && appProcess.importance == RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
