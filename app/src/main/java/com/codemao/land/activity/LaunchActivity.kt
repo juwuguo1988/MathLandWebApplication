@@ -13,6 +13,10 @@ import kotlinx.android.synthetic.main.activity_launch.*
 class LaunchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if ((intent.flags and Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
+            finish()
+            return
+        }
         setContentView(R.layout.activity_launch)
         setListener()
     }
