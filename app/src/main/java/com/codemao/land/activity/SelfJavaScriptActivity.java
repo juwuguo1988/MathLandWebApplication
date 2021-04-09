@@ -84,14 +84,14 @@ public class SelfJavaScriptActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())) {
-                webView.callHandler("gamePause", new OnReturnValue() {
+                webView.callHandler("pause", new OnReturnValue() {
                     @Override
                     public void onValue(Object retValue) {
                         Log.i("============", "gamePause");
                     }
                 });
             } else if (Intent.ACTION_SCREEN_ON.equals(intent.getAction())) {
-                webView.callHandler("gameResume", new OnReturnValue() {
+                webView.callHandler("resume", new OnReturnValue() {
                     @Override
                     public void onValue(Object retValue) {
                         Log.i("============", "gameResume");
